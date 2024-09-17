@@ -1,22 +1,22 @@
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
 import { User } from './user';
 
-interface TicketAttributes {
-  id: number;
-  name: string;
-  status: string;
-  description: string;
-  assignedUserId?: number;
+interface BookAttributes {
+
+  bookId: number;
+  title: string;
+  author: string;
+  isbn: string;
+  
 }
 
-interface TicketCreationAttributes extends Optional<TicketAttributes, 'id'> {}
+interface BookCreationAttributes extends Optional<BookAttributes, 'bookId'> {}
 
-export class Ticket extends Model<TicketAttributes, TicketCreationAttributes> implements TicketAttributes {
-  public id!: number;
-  public name!: string;
-  public status!: string;
-  public description!: string;
-  public assignedUserId!: number;
+export class Book extends Model<BookAttributes, BookCreationAttributes> implements BookAttributes {
+  public bookId!: number;
+  public title!: string;
+  public author!: string;
+  public isbn!: string;
 
   // associated User model
   public readonly assignedUser?: User;
@@ -25,36 +25,32 @@ export class Ticket extends Model<TicketAttributes, TicketCreationAttributes> im
   public readonly updatedAt!: Date;
 }
 
-export function TicketFactory(sequelize: Sequelize): typeof Ticket {
-  Ticket.init(
+export function BookFactory(sequelize: Sequelize): typeof Book {
+  Book.init(
     {
-      id: {
+      bookId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      name: {
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      status: {
+      author: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      description: {
+      isbn: {
         type: DataTypes.STRING,
         allowNull: false,
-      },
-      assignedUserId: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
+      }
     },
     {
-      tableName: 'tickets',
+      tableName: 'books',
       sequelize,
     }
   );
 
-  return Ticket;
+  return Book;
 }
