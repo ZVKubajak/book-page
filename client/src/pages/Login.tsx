@@ -1,13 +1,16 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 
-import Auth from '../utils/auth';
-import { login } from "../api/authAPI";
+import { loginUser } from "../api/userAPI";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
     username: '',
     password: ''
   });
+
+  const navigate = useNavigate();
+
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -20,8 +23,9 @@ const Login = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const data = await login(loginData);
-      Auth.login(data.token);
+      const data = await loginUser(loginData.username, loginData.password);
+      localStorage.setItem('token', data.token);
+      navigate('/home');
     } catch (err) {
       console.error('Failed to login', err);
     }
@@ -47,6 +51,9 @@ const Login = () => {
         />
         <button type='submit'>Submit Form</button>
       </form>
+      <div>
+        <Link to="/register">Register user</Link>
+      </div>
     </div>
     
   )

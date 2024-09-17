@@ -1,39 +1,38 @@
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './index.css';
-
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import App from './App.tsx';
-import Board from './pages/Board.tsx';
+import './index.css';
 import ErrorPage from './pages/ErrorPage.tsx';
-import EditTicket from './pages/EditTicket.tsx';
-import CreateTicket from './pages/CreateTicket.tsx';
+import Home from './pages/Home.tsx';
 import Login from './pages/Login.tsx';
+import Register from './pages/Register.tsx';
+import auth from './utils/auth.ts';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <App />, // Use Layout as the parent route
     errorElement: <ErrorPage />,
     children: [
       {
-        index: true,
-        element: <Board />
-      }, 
-      {
-        path: '/edit',
-        element: <EditTicket />
+        path: '',
+        element: <Navigate to="/login" replace /> // Redirect root to login
       },
       {
-        path: '/create',
-        element: <CreateTicket />
-      },
-      {
-        path: '/login',
+        path: 'login',
         element: <Login />
+      },
+      {
+        path: 'register',
+        element: <Register />
+      },
+      {
+        path: 'home',
+        element: auth.loggedIn() ? <Home /> : <Navigate to="/login" replace /> // Protect the /home route
       }
     ]
   }
-])
+]);
 
 const rootElement = document.getElementById('root');
 if (rootElement) {

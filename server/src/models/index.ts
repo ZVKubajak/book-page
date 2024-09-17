@@ -3,7 +3,6 @@ dotenv.config();
 
 import { Sequelize } from 'sequelize';
 import { UserFactory } from './user.js';
-import { TicketFactory } from './book.js';
 
 const sequelize = process.env.DB_URL
   ? new Sequelize(process.env.DB_URL)
@@ -16,9 +15,8 @@ const sequelize = process.env.DB_URL
     });
 
 const User = UserFactory(sequelize);
-const Ticket = TicketFactory(sequelize);
 
-User.hasMany(Ticket, { foreignKey: 'assignedUserId' });
-Ticket.belongsTo(User, { foreignKey: 'assignedUserId', as: 'assignedUser'});
+// TODO UPDATE THIS TO BOOKS
+// User.hasMany(Ticket, { foreignKey: 'assignedUserId' });
 
-export { sequelize, User, Ticket };
+export { sequelize, User };

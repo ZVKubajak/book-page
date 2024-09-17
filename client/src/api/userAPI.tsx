@@ -1,25 +1,31 @@
-import Auth from '../utils/auth';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const retrieveUsers = async () => {
+/**
+ * Registers a new user and sets the jwt token in local storage
+ * @param username 
+ * @param password 
+ * @param email 
+ */
+const  registerUser = async (username: string, password: string, email: string) => {
   try {
-    const response = await fetch('/api/users', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${Auth.getToken()}`
-      }
-    });
-    const data = await response.json();
+    const res = await axios.post('/api/users', { username, email, password });
+    localStorage.setItem('token', res.data.token);
+    let navigate = useNavigate();
+    navigate('/login');      
 
-    if(!response.ok) {
-      throw new Error('invalid user API response, check network tab!');
-    }
-
-    return data;
-
-  } catch (err) { 
-    console.log('Error from data retrieval:', err);
-    return [];
+  } catch (error) {
+    console.error('Registration error:', error);
   }
 }
 
-export { retrieveUsers };
+const loginUser = async (username: string, password: string) => {
+  try {
+    const res = await axios.post('/api/users/login', { username, password });
+    return res.data;
+  } catch (error) {
+    console.error('Login error:', error);
+  }
+}
+
+export { registerUser, loginUser };

@@ -1,3 +1,10 @@
+# Book Page
+
+## Setup
+1. `cd` into `client/db`
+2. Run `psql -U postgres` enter your password
+3. Run `\i schema.sql` to create the database
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
