@@ -3,7 +3,7 @@ dotenv.config();
 
 import { Sequelize } from 'sequelize';
 import { UserFactory } from './user.js';
-import { TicketFactory } from './ticket.js';
+import { TicketFactory } from './book.js';
 
 const sequelize = process.env.DB_URL
   ? new Sequelize(process.env.DB_URL)
