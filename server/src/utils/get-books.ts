@@ -1,26 +1,38 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import express from 'express';
+import { formatBookData, GoogleBookVolume } from './format-data';
+import { Request, Response} from 'express';
 const router = express.Router();
 
-const API_KEY = 'API_KEY';
+const API_KEY = process.env.API_KEY;
 
 // Route to search for books
-router.get('/api/search', async (req, res) => {
+export const searchAPI = async (req: Request, res: Response) => {
   const query = req.query.q;
 
   if (!query) {
     return res.status(400).json({ error: 'No search query provided' });
   }
 
-  try {
+  try { 
+    console.log(API_KEY);
     // Fetching data from Google Books API
     const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&key=${API_KEY}`);
     const data = await response.json();
 console.log(data);
     // Sending the data back to the frontend
-    return res.json(data.items || []);  
+    if (data.items) {
+      // Format the book data to match your Sequelize model
+      const formattedBooks = await data.items.map((item: GoogleBookVolume) => formatBookData(item));
+      res.json(formattedBooks);  // Send formatted books to the frontend
+    } else {
+      res.json([]);  // Return an empty array if no items found
+    }
   } catch (error) {
-   return res.status(500).json({ error: 'Failed to fetch books' });
+    res.status(500).json({ error: 'Failed to fetch books' });
   }
-});
-
+};
+router.get('/api/search', searchAPI);
 export { router as BookRouter };
+

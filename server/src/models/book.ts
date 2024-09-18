@@ -54,3 +54,5 @@ export function BookFactory(sequelize: Sequelize): typeof Book {
 
   return Book;
 }
+
+export {BookAttributes};
