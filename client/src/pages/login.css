@@ -2,8 +2,7 @@
 .title {
   color: blueviolet;
 }
-/* .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
+
+.container {
+  max-width: 600px;
+}
