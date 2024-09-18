@@ -3,6 +3,7 @@ dotenv.config();
 
 import { Sequelize } from 'sequelize';
 import { UserFactory } from './user.js';
+// import { Book } from './book.js';
 
 const sequelize = process.env.DB_URL
   ? new Sequelize(process.env.DB_URL)
@@ -17,6 +18,6 @@ const sequelize = process.env.DB_URL
 const User = UserFactory(sequelize);
 
 // TODO UPDATE THIS TO BOOKS
-// User.hasMany(Ticket, { foreignKey: 'assignedUserId' });
+// User.hasMany(Book, { foreignKey: 'assignedUserId' });
 
 export { sequelize, User };
