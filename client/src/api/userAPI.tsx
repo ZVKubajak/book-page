@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
  */
 const  registerUser = async (username: string, password: string, email: string) => {
   try {
-    const res = await axios.post('/api/users', { username, email, password });
+    const res = await axios.post('/api/register', { username, email, password });
     localStorage.setItem('token', res.data.token);
     let navigate = useNavigate();
     navigate('/login');      
@@ -21,7 +21,7 @@ const  registerUser = async (username: string, password: string, email: string) 
 
 const loginUser = async (username: string, password: string) => {
   try {
-    const res = await axios.post('/api/users/login', { username, password });
+    const res = await axios.post('/api/login', { username, password });
     return res.data;
   } catch (error) {
     console.error('Login error:', error);

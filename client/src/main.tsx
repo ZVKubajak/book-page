@@ -2,10 +2,10 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import App from './App.tsx';
 import './index.css';
-import ErrorPage from './pages/ErrorPage.tsx';
-import Home from './pages/Home.tsx';
+import ErrorPage from './pages/Library.tsx';
+import Home from './pages/Reviews.tsx';
 import Login from './pages/Login.tsx';
-import Register from './pages/Register.tsx';
+import Register from './pages/Search.tsx';
 import auth from './utils/auth.ts';
 
 const router = createBrowserRouter([

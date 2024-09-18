@@ -1,3 +1,4 @@
+import './login.css';
 import { useState, FormEvent, ChangeEvent } from "react";
 
 import { loginUser } from "../api/userAPI";
@@ -32,27 +33,31 @@ const Login = () => {
   };
 
   return (
-    <div className='container'>
-      <form className='form' onSubmit={handleSubmit}>
-        <h1>Login</h1>
-        <label >Username</label>
+    <div className='container d-flex flex-column'>
+      <form className="d-flex flex-column" onSubmit={handleSubmit}>
+        <h1 className='title mb-5'>Login</h1>
+        <label htmlFor="username" className="form-label">Username</label>
         <input 
           type='text'
           name='username'
           value={loginData.username || ''}
           onChange={handleChange}
+          id="username"
+          className="form-control mb-4"
         />
-      <label>Password</label>
+        <label className='form-label'>Password</label>
         <input 
           type='password'
           name='password'
           value={loginData.password || ''}
           onChange={handleChange}
+          id="password"
+          className="form-control"
         />
-        <button type='submit'>Submit Form</button>
+        <button className="btn btn-outline-primary my-4" type='submit'>Submit Form</button>
       </form>
       <div>
-        <Link to="/register">Register user</Link>
+        <Link className="link-offset-3" to="/register">Register user</Link>
       </div>
     </div>
     
