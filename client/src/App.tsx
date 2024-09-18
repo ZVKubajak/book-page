@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Outlet, useNavigate } from 'react-router-dom';
 import auth from './utils/auth'; // Adjust the import path as necessary
 
@@ -13,12 +14,12 @@ function App() {
   }
 
   return (
-    <div className='container'>
-      <header>
-        <h1>Bookshelf Header - TODO show username on login</h1>
+    <div>
+      <header className="d-flex justify-content-between align-items-center p-4 mb-5">
+        <h3>Bookpage</h3>
         {auth.loggedIn() && (
           <div>
-            <button onClick={handleLogout}>Logout</button>
+            <button className="btn btn-outline-dark" onClick={handleLogout}>Logout</button>
           </div>
         )}
       </header>
