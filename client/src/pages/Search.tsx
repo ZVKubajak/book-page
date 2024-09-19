@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './css/Search.css';
 
 // Define the Book type with bookId
@@ -9,15 +9,17 @@ interface Book {
   isbn: string;
 }
 
-function BookSearch() {
+const BookSearch: React.FC = () => {
+  
   const [query, setQuery] = useState('');
   const [books, setBooks] = useState<Book[]>([]);
 
-  const searchBooks = async () => {
+  const searchBooks = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     if (!query) return;
 
     try {
-      const response = await fetch(`/api/search?q=${query}`);
+      const response = await fetch(`/api/books/search?q=${query}`);
       const data: Book[] = await response.json();
       localStorage.setItem('books', JSON.stringify(data));
       setBooks(data);
@@ -25,6 +27,8 @@ function BookSearch() {
       console.error('Error fetching books:', error);
     }
   };
+
+
 
   return (
     <div className='search-container'>
@@ -48,6 +52,13 @@ function BookSearch() {
                 <h3>{book.title}</h3>
                 <p>{book.author}</p>
                 <p>{book.isbn}</p>
+                <button
+                    // onClick={() => addBook(book)}
+                    // className='btn btn-success'
+                  >
+                    Add
+                  </button>
+                
               </li>
             ))}
           </ul>

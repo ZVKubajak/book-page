@@ -13,6 +13,8 @@ export const bookSearch = async (req: Request, res: Response) => {
     return res.status(400).json({ error: 'No search query provided' });
   }
 
+let formattedBooks = []; 
+// let formattedReviews = [];
   try {
     console.log(API_KEY);
     // Fetching data from Google Books API
@@ -22,7 +24,7 @@ console.log(data);
     // Sending the data back to the frontend
     if (data.items) {
       // Format the book data to match your Sequelize model
-      const formattedBooks = await data.items.map((item: GoogleBookVolume) => formatBookData(item));
+       formattedBooks = await data.items.map((item: GoogleBookVolume) => formatBookData(item));
        return res.json(formattedBooks); 
     }
     // return res.json(data.items || []);  
