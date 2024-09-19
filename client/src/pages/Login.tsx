@@ -2,7 +2,7 @@ import './css/Login.css';
 import { useState, FormEvent, ChangeEvent } from "react";
 
 import { loginUser } from "../api/userAPI";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -17,13 +17,14 @@ const Login = () => {
       [name]: value
     });
   };
+const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
       const data = await loginUser(loginData.username, loginData.password);
       localStorage.setItem('token', data.token);
-      window.location.assign('/search');
+      navigate('/search');
     } catch (err) {
       console.error('Failed to login', err);
     }
