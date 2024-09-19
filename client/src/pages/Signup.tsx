@@ -1,19 +1,17 @@
-import './css/login.css';
-import { useState, FormEvent, ChangeEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from 'react';
+import { registerUser } from '../api/userAPI';
+import './css/Signup.css';
 
-import { loginUser } from "../api/userAPI";
-import { Link } from "react-router-dom";
-
-const Login = () => {
-  const [loginData, setLoginData] = useState({
+export default function Signup() {
+  const [signupData, setSignupData] = useState({
     username: '',
     password: ''
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setLoginData({
-      ...loginData,
+    setSignupData({
+      ...signupData,
       [name]: value
     });
   };
@@ -21,23 +19,22 @@ const Login = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const data = await loginUser(loginData.username, loginData.password);
-      localStorage.setItem('token', data.token);
-      window.location.assign('/search');
+      await registerUser(signupData.username, signupData.password);
+      window.location.assign('/login');
     } catch (err) {
-      console.error('Failed to login', err);
+      console.error('Failed to sign up user', err);
     }
   };
 
   return (
     <div className='container d-flex flex-column'>
       <form className="d-flex flex-column" onSubmit={handleSubmit}>
-        <h1 className='title mb-5'>Login</h1>
+        <h1 className='title mb-5'>Sign Up</h1>
         <label htmlFor="username" className="form-label">Username</label>
         <input 
           type='text'
           name='username'
-          value={loginData.username || ''}
+          value={signupData.username || ''}
           onChange={handleChange}
           id="username"
           className="form-control mb-4"
@@ -46,19 +43,14 @@ const Login = () => {
         <input 
           type='password'
           name='password'
-          value={loginData.password || ''}
+          value={signupData.password || ''}
           onChange={handleChange}
           id="password"
           className="form-control"
         />
-        <button className="btn btn-outline-primary my-4" type='submit'>Submit</button>
+        <button className="btn btn-outline-primary my-4" type='submit'>Register</button>
       </form>
-      <div>
-        <Link className="link-offset-3" to="/signup">Sign Up</Link>
-      </div>
     </div>
     
   )
 };
-
-export default Login;

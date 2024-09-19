@@ -3,10 +3,11 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import App from './App.tsx';
 import './index.css';
 import ErrorPage from './pages/Library.tsx';
-import Home from './pages/Reviews.tsx';
+import Reviews from './pages/Reviews.tsx';
 import Login from './pages/Login.tsx';
-import Register from './pages/Search.tsx';
 import auth from './utils/auth.ts';
+import Signup from './pages/Signup.tsx';
+import Search from './pages/Search.tsx';
 
 const router = createBrowserRouter([
   {
@@ -23,12 +24,16 @@ const router = createBrowserRouter([
         element: <Login />
       },
       {
-        path: 'register',
-        element: <Register />
+        path: 'signup',
+        element: <Signup />
       },
       {
-        path: 'home',
-        element: auth.loggedIn() ? <Home /> : <Navigate to="/login" replace /> // Protect the /home route
+        path: 'search',
+        element: <Search />
+      },
+      {
+        path: 'reviews',
+        element: auth.loggedIn() ? <Reviews /> : <Navigate to="/login" replace /> // Protect the /home route
       }
     ]
   }
