@@ -1,45 +1,53 @@
-import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
-import App from './App.tsx';
-import './index.css';
-import ErrorPage from './pages/Library.tsx';
-import Reviews from './pages/Reviews.tsx';
-import Login from './pages/Login.tsx';
-import auth from './utils/auth.ts';
-import Signup from './pages/Signup.tsx';
-import Search from './pages/Search.tsx';
+import ReactDOM from "react-dom/client";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
+import App from "./App.tsx";
+import "./index.css";
+import ErrorPage from "./pages/Library.tsx";
+import Reviews from "./pages/Reviews.tsx";
+import Login from "./pages/Login.tsx";
+import auth from "./utils/auth.ts";
+import Signup from "./pages/Signup.tsx";
+import Search from "./pages/Search.tsx";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />, // Use Layout as the parent route
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '',
-        element: <Navigate to="/login" replace /> // Redirect root to login
+        path: "",
+        element: <Navigate to="/login" replace />, // Redirect root to login
       },
       {
-        path: 'login',
-        element: <Login />
+        path: "login",
+        element: <Login />,
       },
       {
-        path: 'signup',
-        element: <Signup />
+        path: "signup",
+        element: <Signup />,
       },
       {
-        path: 'search',
-        element: <Search />
+        path: "search",
+        element: <Search />,
       },
       {
-        path: 'reviews',
-        element: auth.loggedIn() ? <Reviews /> : <Navigate to="/login" replace /> // Protect the /home route
-      }
-    ]
-  }
+        path: "reviews",
+        element: auth.loggedIn() ? (
+          <Reviews />
+        ) : (
+          <Navigate to="/login" replace />
+        ), // Protect the /home route
+      },
+    ],
+  },
 ]);
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(<RouterProvider router={router} />);
 }
