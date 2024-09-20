@@ -17,7 +17,19 @@ const Library = () => {
 
   const rows: JSX.Element[] = [];
   books.forEach((book, index) => {
-
+    rows.push(
+      <tr>
+        <td>{book.bookId}</td>
+        <td>{book.title}</td>
+        <td>{book.author}</td>
+        <td>{book.isbn}</td>
+        <td>
+          <button id="remove-book" onClick={() => removeBook(index)}>
+            Remove
+          </button>
+        </td>
+      </tr>
+    );
   });
 
   return (
