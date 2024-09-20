@@ -12,25 +12,25 @@ import BestSeller from './pages/Bestseller.tsx';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />, // Use Layout as the parent route
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '',
-        element: <Navigate to="/login" replace /> // Redirect root to login
+        path: "",
+        element: <Navigate to="/login" replace />, // Redirect root to login
       },
       {
-        path: 'login',
-        element: <Login />
+        path: "login",
+        element: <Login />,
       },
       {
-        path: 'signup',
-        element: <Signup />
+        path: "signup",
+        element: <Signup />,
       },
       {
-        path: 'search',
-        element: <Search />
+        path: "search",
+        element: <Search />,
       },
       {
         path: 'bestsellers',
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
   }
 ]);
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(<RouterProvider router={router} />);
 }
