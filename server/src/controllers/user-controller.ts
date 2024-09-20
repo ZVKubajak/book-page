@@ -5,8 +5,9 @@ import secrets from "../config/secrets.js";
 
 // POST /Users/login
 export const loginUser = async (req: Request, res: Response) => {
-  const { username, password } = req.body;
   try {
+    console.log(req.body);
+    const { username, password } = req.body;
     const user = await User.findOne({ where: { username } });
     if (!user) {
       return res.status(400).json({ error: "User not found" });
@@ -18,7 +19,7 @@ export const loginUser = async (req: Request, res: Response) => {
     }
 
     const token = jwt.sign({ id: user.id }, secrets.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "24h",
     });
     res.json({ token, user: { id: user.id, username: user.username } });
   } catch (error) {
@@ -48,14 +49,14 @@ export const registerUser = async (req: Request, res: Response) => {
     }
 
     // Create a new user instance
-    const newUser = User.build({ username, password });
+    const newUser = await User.create({ username, password });
 
     // Hash the password before saving
-    await newUser.setPassword(password);
+    // await newUser.setPassword(password);
 
     // Save the new user to the database
-    await newUser.save();
-
+    // await newUser.save();
+console.log(newUser);
     // Respond with the newly created user (excluding the password)
     res.status(201).json({ id: newUser.id, username: newUser.username });
   } catch (error) {
