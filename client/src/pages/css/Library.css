@@ -2,3 +2,28 @@
   text-align: center;
   padding-top: 50px;
 }
+
+.book-row {
+  height: 50px;
+}
+
+table {
+  width: 80vh;
+  table-layout: fixed;
+}
+
+tr {
+  border-radius: 10px;
+  background-color: #000;
+  color: white;
+}
+
+td {
+  min-width: 80px;
+  text-align: center;
+  padding: 0px 10px;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #333333;
+}

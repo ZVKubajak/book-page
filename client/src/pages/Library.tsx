@@ -23,8 +23,22 @@ const Library = () => {
   return (
     <div id="library-container">
       <h1>Library</h1>
+
+      <main>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th>ISBN</th>
+            </tr>
+          </thead>
+          <tbody>{rows}</tbody>
+        </table>
+      </main>
     </div>
   );
-}
+};
 
 export default Library;
