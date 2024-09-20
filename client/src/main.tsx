@@ -1,17 +1,14 @@
-import ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from "react-router-dom";
-import App from "./App.tsx";
-import "./index.css";
-import ErrorPage from "./pages/Library.tsx";
-import Reviews from "./pages/Reviews.tsx";
-import Login from "./pages/Login.tsx";
-import auth from "./utils/auth.ts";
-import Signup from "./pages/Signup.tsx";
-import Search from "./pages/Search.tsx";
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
+import App from './App.tsx';
+import './index.css';
+import ErrorPage from './pages/Library.tsx';
+import Reviews from './pages/Reviews.tsx';
+import Login from './pages/Login.tsx';
+import auth from './utils/auth.ts';
+import Signup from './pages/Signup.tsx';
+import Search from './pages/Search.tsx';
+import BestSeller from './pages/Bestseller.tsx';
 
 const router = createBrowserRouter([
   {
@@ -36,15 +33,15 @@ const router = createBrowserRouter([
         element: <Search />,
       },
       {
-        path: "reviews",
-        element: auth.loggedIn() ? (
-          <Reviews />
-        ) : (
-          <Navigate to="/login" replace />
-        ), // Protect the /home route
+        path: 'bestsellers',
+        element: <BestSeller />
       },
-    ],
-  },
+      {
+        path: 'reviews',
+        element: auth.loggedIn() ? <Reviews /> : <Navigate to="/login" replace /> // Protect the /home route
+      }
+    ]
+  }
 ]);
 
 const rootElement = document.getElementById("root");
