@@ -1,29 +1,13 @@
-#library-container h1 {
+#library h1 {
   text-align: center;
-  padding-top: 50px;
+  padding: 80px 0 100px 0;
 }
 
-.book-row {
-  height: 50px;
+main {
+  width: 150vh;
+  margin: auto;
 }
 
-table {
-  width: 80vh;
-  table-layout: fixed;
-}
-
-tr {
-  border-radius: 10px;
-  background-color: #000;
-  color: white;
-}
-
-td {
-  min-width: 80px;
-  text-align: center;
-  padding: 0px 10px;
-}
-
-tbody tr:nth-child(odd) {
-  background-color: #333333;
+.center {
+  text-align: center
 }
