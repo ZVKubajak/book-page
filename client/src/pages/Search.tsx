@@ -41,7 +41,6 @@ const BookSearch: React.FC = () => {
 
   return (
     <div className='search-container'>
-      <Link to = "/bestsellers"> best sellers </Link>
       <div className='search-box'>
         <form>
           <input
