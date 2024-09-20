@@ -2,10 +2,29 @@ import { useState } from 'react';
 import { Book } from '../utils/bookInterface.ts';
 import "./css/Library.css";
 
-export default function Library() {
+const Library = () => {
+  const [books, setBooks] = useState<Book[]>(() => {
+    const savedBooks = localStorage.getItem('savedUsers');
+
+    return savedBooks ? JSON.parse(savedBooks) : [];
+  });
+
+  const removeBook = (index: number) => {
+    const updatedBooks = books.filter((_, i) => i !== index);
+    localStorage.setItem('savedBooks', JSON.stringify(updatedBooks));
+    setBooks(updatedBooks);
+  };
+
+  const rows: JSX.Element[] = [];
+  books.forEach((book, index) => {
+
+  });
+
   return (
-    <h1 id="library">
-      Library
-    </h1>
+    <div id="library-container">
+      <h1>Library</h1>
+    </div>
   );
 }
+
+export default Library;
