@@ -15,7 +15,11 @@ const BookSearch: React.FC = () => {
 
   const searchBooks = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    if (!query) return console.log('No query found.');
+    if (!query) {
+      console.log("No query found.");
+      alert("Please enter a search term.");
+      return;
+    }
 
     try {
       const response = await fetch(`/api/books/search?q=${query}`);
@@ -28,9 +32,9 @@ const BookSearch: React.FC = () => {
   };
 
   const addBook = (book: Book) => {
-    const savedBooks = JSON.parse(localStorage.getItem('savedBooks') || '[]');
-    const updatedBooks = [...savedBooks, book]
-    localStorage.setItem('savedBooks', JSON.stringify(updatedBooks));
+    const savedBooks = JSON.parse(localStorage.getItem("savedBooks") || "[]");
+    const updatedBooks = [...savedBooks, book];
+    localStorage.setItem("savedBooks", JSON.stringify(updatedBooks));
     console.log(`${book.title} by ${book.author} was added to saved books!`);
   };
 
@@ -61,8 +65,8 @@ const BookSearch: React.FC = () => {
                     <p>{book.author}</p>
                     <p>{book.isbn}</p>
                     <button
-                    onClick={() => addBook(book)}
-                    className='btn btn-success'
+                      onClick={() => addBook(book)}
+                      className="btn btn-success"
                     >
                       Add
                     </button>
