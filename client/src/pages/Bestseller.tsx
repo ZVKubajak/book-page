@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import './css/BestSeller.css';
+import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
 interface List {
     list_name: string;
@@ -15,6 +17,8 @@ interface Bestsellerbook {
 const BestSeller: React.FC = () => {
   
     const [lists, setList] = useState<List[]>([]);
+    const [openList, setOpenList] = useState<{ [key: string]: boolean }>({}); // Track open lists
+
   
     const searchBooks = async () => {
     
@@ -32,35 +36,61 @@ const BestSeller: React.FC = () => {
     useEffect(() => {
          searchBooks();
       }, []);
-  
+
+  // Function to toggle list open/close
+  const toggleList = (listName: string) => {
+    setOpenList((prev) => ({
+      ...prev,
+      [listName]: !prev[listName], // Toggle the specific list's open state
+    }));
+  };
   
     return (
       <div>
-        <div className='search-results'>
-          <div className='result-item'>
-          {lists.length > 0 ? (
-            <ul>
-              {lists.map((list) => (
-                <li key={list.list_name}> 
-                  <h3>{list.list_name}</h3>
-                  <ul>
-                    {list.books.map((book) =>(
-                        <li key={book.title}>
-                            <h4>{book.author}</h4>
+            <div className='search-results'>
+                {lists.length > 0 ? (
+                    <ul className='folder-list'>
+                        {lists.map((list) => (
+                            <li key={list.list_name} className='folder-item'>
+                                <h3 onClick={() => toggleList(list.list_name)} className="folder-title">
+                                    {list.list_name}
+                                    {openList[list.list_name] ? (
+                                        <FaAngleUp className="folder-arrow" />
+                                    ) : (
+                                        <FaAngleDown className="folder-arrow" />
+                                    )}
+                                </h3>
+                                {openList[list.list_name] && (
+                                    <ul className="books-grid">
+                                        {list.books.map((book) => (
+                                            <li key={book.title} className="book-card">
+                                                {/* Book Image */}
+                                                <a href={book.amazon_product_url} target="_blank" rel="noopener noreferrer">
+                                                    <img src={book.book_image} alt={book.title} className="book-image" />
+                                                </a>
+
+                                                {/* Book Title as a clickable link */}
+                                                <a href={book.amazon_product_url} target="_blank" rel="noopener noreferrer">
+                                                    <h4>{book.title}</h4>
+                                                </a>
+
+                                                {/* Author */}
+                                                <p>Author: {book.author}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+
                             </li>
 
-                    ))}
-                  </ul>
-                </li>
-                
-              ))}
-            </ul>
+                        ))}
+                    </ul>
           ) : (
             <p>No books found</p>
           )}
         </div>
       </div>
-      </div>
+
       
     );
   }
