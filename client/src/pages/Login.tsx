@@ -24,6 +24,7 @@ const navigate = useNavigate();
     try {
       const data = await loginUser(loginData.username, loginData.password);
       localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
       navigate('/search');
     } catch (err) {
       console.error('Failed to login', err);

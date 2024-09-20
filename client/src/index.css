@@ -6,11 +6,57 @@
   font-weight: 400;
   color: black;
   font-synthesis: none;
+  background-color: #f8f9fa;  
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+header {
+  background-color: white;
+}
+
+body {
+  background-color: #f8f9fa !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+.nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; /* Removes the bullet points from the list */
+
+    li {      
+      a {
+        color: black;
+        padding: 5px;
+        border: 2px solid transparent; /* transparent border to start with to allow for smooth transition when active */
+      }
+    
+      a.active {
+        color: #00afb9;
+        border: 2px solid #00afb9;
+        transition: color 0.3s ease, border 0.3s ease; /* Adds a smooth transition effect to the color and border */
+      }
+    
+      /* Non active links */
+      a:not(.active) {
+        border-bottom: 2px solid transparent;
+        padding-bottom: 5px; /* Adds space between the text and the border */
+        transition: border-bottom 0.3s ease; /* Adds a smooth transition effect */
+      }
+    
+      /* Non active links on hover styling */
+      a:not(.active):hover {
+        border-bottom: 2px solid #00afb9;
+      }
+    }
+  }
+}
 h1, h2, h3, h4, h5 {
   margin-bottom: 0;
 }
