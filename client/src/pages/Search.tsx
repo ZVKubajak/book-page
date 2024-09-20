@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './css/Search.css';
+import { Link } from 'react-router-dom'
 
 // Define the Book type with bookId
 interface Book {
@@ -32,6 +33,7 @@ const BookSearch: React.FC = () => {
 
   return (
     <div className='search-container'>
+      <Link to = "/bestsellers"> best sellers </Link>
       <div className='search-box'>
         <form>
       <input

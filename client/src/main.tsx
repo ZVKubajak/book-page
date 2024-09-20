@@ -8,6 +8,7 @@ import Login from './pages/Login.tsx';
 import auth from './utils/auth.ts';
 import Signup from './pages/Signup.tsx';
 import Search from './pages/Search.tsx';
+import BestSeller from './pages/Bestseller.tsx';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: 'search',
         element: <Search />
+      },
+      {
+        path: 'bestsellers',
+        element: <BestSeller />
       },
       {
         path: 'reviews',
