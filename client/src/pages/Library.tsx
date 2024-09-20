@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import { Book } from '../utils/bookInterface.ts';
+import { useState } from "react";
+import { Book } from "../utils/bookInterface.ts";
 import "./css/Library.css";
 
 const Library = () => {
   const [books, setBooks] = useState<Book[]>(() => {
-    const savedBooks = localStorage.getItem('savedUsers');
+    const savedBooks = localStorage.getItem("savedUsers");
 
     return savedBooks ? JSON.parse(savedBooks) : [];
   });
 
   const removeBook = (index: number) => {
     const updatedBooks = books.filter((_, i) => i !== index);
-    localStorage.setItem('savedBooks', JSON.stringify(updatedBooks));
+    localStorage.setItem("savedBooks", JSON.stringify(updatedBooks));
     setBooks(updatedBooks);
   };
 
