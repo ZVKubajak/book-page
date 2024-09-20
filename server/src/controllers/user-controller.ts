@@ -51,11 +51,6 @@ export const registerUser = async (req: Request, res: Response) => {
     // Create a new user instance
     const newUser = await User.create({ username, password });
 
-    // Hash the password before saving
-    // await newUser.setPassword(password);
-
-    // Save the new user to the database
-    // await newUser.save();
 console.log(newUser);
     // Respond with the newly created user (excluding the password)
     res.status(201).json({ id: newUser.id, username: newUser.username });
