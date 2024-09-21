@@ -25,7 +25,6 @@ const router = createBrowserRouter([
         path: "login",
         element: <Login />,
       },
-
       {
         path: "signup",
         element: <Signup />,
@@ -45,7 +44,6 @@ const router = createBrowserRouter([
       {
         path: 'library',
         element: auth.loggedIn() ? <Library /> : <Navigate to="/login" replace />
-
       }
     ]
   }

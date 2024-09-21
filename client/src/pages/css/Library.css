@@ -1,0 +1,13 @@
+#library h1 {
+  text-align: center;
+  padding: 80px 0 100px 0;
+}
+
+main {
+  width: 150vh;
+  margin: auto;
+}
+
+.center {
+  text-align: center
+}
