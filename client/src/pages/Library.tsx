@@ -1,40 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Book } from "../utils/bookInterface.ts";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import "./css/Library.css";
 
 const Library = () => {
-  const [books, setBooks] = useState<Book[]>(() => {
-    const savedBooks = localStorage.getItem("savedUsers");
+  const [books, setBooks] = useState<Book[]>([]);
 
-    return savedBooks ? JSON.parse(savedBooks) : [];
-  });
+    useEffect(() => {
+      const savedBooks = JSON.parse(localStorage.getItem("savedBooks") || "[]");
+      setBooks(savedBooks);
+    }, []);
 
-  // TEST VALUES //
-
-  /*
-  const [books, setBooks] = useState<Book[]>([
-    {
-      bookId: 1,
-      title: "The Great Gatsby",
-      author: "F. Scott Fitzgerald",
-      isbn: "9780743273565",
-    },
-    {
-      bookId: 2,
-      title: "1984",
-      author: "George Orwell",
-      isbn: "9780451524935",
-    },
-    {
-      bookId: 3,
-      title: "To Kill a Mockingbird",
-      author: "Harper Lee",
-      isbn: "9780061120084",
-    },
-  ]);
-  */
 
   const removeBook = (index: number) => {
     const updatedBooks = books.filter((_, i) => i !== index);
@@ -45,8 +22,8 @@ const Library = () => {
   const rows: JSX.Element[] = [];
   books.forEach((book, index) => {
     rows.push(
-      <tr>
-        <td className="center">{book.bookId}</td>
+       <tr key={book.bookId}>
+        <td className="center">{index + 1}</td>
         <td>{book.title}</td>
         <td>{book.author}</td>
         <td>{book.isbn}</td>
