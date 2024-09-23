@@ -40,7 +40,9 @@ const BookSearch: React.FC = () => {
   };
 
   return (
-    <div className='search-container'>
+    
+    <div className='search-container d-flex flex-column align-items-center'>
+      <h1 className="mb-5">Search</h1>
       <div className='search-box'>
         <form>
           <input
@@ -54,12 +56,12 @@ const BookSearch: React.FC = () => {
             Search
           </button>
         </form>
-        <div className="search-results">
-          <div className="result-item">
+        <div className="search-results mt-4 p-4">
+          <div>
             {books.length > 0 ? (
               <ul>
-                {books.map((book) => (
-                  <li key={book.bookId}>
+                {books.map((book, index) => (
+                  <li className="result-item pb-3 d-flex flex-column gap-2" key={`${book.bookId}-${index}`}>
                     {" "}
                     {/* Use bookId as the key */}
                     <h3>{book.title}</h3>
