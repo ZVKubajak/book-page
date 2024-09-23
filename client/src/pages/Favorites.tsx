@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './css/Favorites.css';
 
 // Type definition for a book
 interface Book {
