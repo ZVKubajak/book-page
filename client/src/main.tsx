@@ -3,7 +3,6 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import App from './App.tsx';
 import './index.css';
 import ErrorPage from './pages/Library.tsx';
-import Reviews from './pages/Reviews.tsx';
 import Login from './pages/Login.tsx';
 import auth from './utils/auth.ts';
 import Signup from './pages/Signup.tsx';
@@ -36,10 +35,6 @@ const router = createBrowserRouter([
       {
         path: 'bestsellers',
         element: auth.loggedIn() ? <BestSeller /> : <Navigate to="/login" replace />
-      },
-      {
-        path: 'reviews',
-        element: auth.loggedIn() ? <Reviews /> : <Navigate to="/login" replace />
       },
       {
         path: 'library',

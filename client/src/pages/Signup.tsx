@@ -3,6 +3,9 @@ import { registerUser } from '../api/userAPI';
 import './css/Signup.css';
 
 export default function Signup() {
+  const [nameIsEmpty, setNameIsEmpty] = useState(false);
+  const [passwordisEmpty, setPasswordIsEmpty] = useState(false);
+  const [disableSubmit, setDisableSubmit] = useState(true);
   const [signupData, setSignupData] = useState({
     username: '',
     password: ''
@@ -10,10 +13,25 @@ export default function Signup() {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setSignupData({
+    const updatedSignupData = {
       ...signupData,
       [name]: value
-    });
+    };
+    setSignupData(updatedSignupData);
+    setDisableSubmit(
+      updatedSignupData.username.trim() === '' || updatedSignupData.password.trim() === ''
+    );
+  };
+
+  const handleBlur = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    if (name === 'username') {
+      setNameIsEmpty(value.trim() === '');
+    }
+    
+    if (name === 'password') {
+      setPasswordIsEmpty(value.trim() === '');
+    }
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -36,19 +54,31 @@ export default function Signup() {
           name='username'
           value={signupData.username || ''}
           onChange={handleChange}
+          onBlur={handleBlur}
           id="username"
-          className="form-control mb-4"
+          className={`form-control border ${nameIsEmpty ? 'border-danger' : ''}`}
         />
-        <label className='form-label'>Password</label>
+        {nameIsEmpty && 
+        	<div className='mt-2 text-danger'>
+          	Name is required.
+        	</div>
+        }
+        <label className='form-label mt-4'>Password</label>
         <input 
           type='password'
           name='password'
           value={signupData.password || ''}
           onChange={handleChange}
+          onBlur={handleBlur}
           id="password"
-          className="form-control"
+          className={`form-control border ${passwordisEmpty ? 'border-danger' : ''}`}
         />
-        <button className="btn btn-outline-primary my-4" type='submit'>Register</button>
+        {passwordisEmpty && 
+        	<div className="mt-2 text-danger">
+          	Password is required.
+        	</div>
+        }
+        <button disabled={disableSubmit} className="btn btn-outline-primary my-4" type='submit'>Register</button>
       </form>
     </div>
     

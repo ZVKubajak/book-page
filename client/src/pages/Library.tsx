@@ -22,7 +22,7 @@ const Library = () => {
   const rows: JSX.Element[] = [];
   books.forEach((book, index) => {
     rows.push(
-       <tr key={book.bookId}>
+       <tr key={`${book.bookId}-${index} `}>
         <td className="center">{index + 1}</td>
         <td>{book.title}</td>
         <td>{book.author}</td>
@@ -37,9 +37,8 @@ const Library = () => {
   });
 
   return (
-    <div id="library">
-      <h1>Library</h1>
-
+    <div id="library" className="d-flex flex-column align-items-center">
+      <h1 className="mb-5">Library</h1>
       <main>
         <Table striped bordered hover variant="dark">
           <thead>
