@@ -24,6 +24,9 @@ function App() {
                 <NavLink to="/library">Library</NavLink>
               </li>
               <li>
+                <NavLink to="/favorites">Favorites</NavLink>
+              </li>
+              <li>
                 <NavLink to="/bestsellers">Best Sellers</NavLink>
               </li>
             </ul>
