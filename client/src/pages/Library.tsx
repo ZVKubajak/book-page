@@ -3,6 +3,8 @@ import { Book } from "../utils/bookInterface.ts";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import "./css/Library.css";
+import { TiStarFullOutline } from "react-icons/ti";
+
 
 const Library = () => {
   const [books, setBooks] = useState<Book[]>([]);
@@ -28,9 +30,19 @@ const Library = () => {
         <td>{book.author}</td>
         <td>{book.isbn}</td>
         <td className="center">
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <button 
+            // onClick={saveBookToLocalStorage} 
+            style={{ background: 'none', border: 'none', cursor: 'pointer', marginBottom: '8px', color: 'white' }}
+            aria-label="Save to Favorites"
+            className="icon-button"
+          >
+            <TiStarFullOutline size={24} className="star-icon" /> 
+          </button>
           <Button variant="danger" onClick={() => removeBook(index)}>
             Remove
           </Button>
+          </div>
         </td>
       </tr>
     );
