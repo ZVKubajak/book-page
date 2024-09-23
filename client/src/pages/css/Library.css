@@ -1,13 +1,25 @@
-#library h1 {
-  text-align: center;
-  padding: 80px 0 100px 0;
-}
-
-main {
-  width: 150vh;
-  margin: auto;
-}
 
 .center {
   text-align: center
+}
+
+#library {
+
+
+  h1, table {
+    width: 100%;
+    max-width: 900px;
+    min-width: 900px;
+  }
+  table {
+
+    /* Allows for setting table border */
+    border-radius: 10px;
+    overflow: hidden;
+
+    td {
+      /* aligns text to the center of the cell */
+      vertical-align: middle;
+    }
+  }
 }

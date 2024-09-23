@@ -47,7 +47,8 @@ const BestSeller: React.FC = () => {
   
     return (
       <div>
-            <div className='search-results'>
+        <h1 className="mb-5 mx-4">Best Sellers</h1>
+        <div className='search-results'>
                 {lists.length > 0 ? (
                     <ul className='folder-list'>
                         {lists.map((list) => (
