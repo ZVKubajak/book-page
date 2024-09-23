@@ -6,12 +6,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [nameIsEmpty, setNameIsEmpty] = useState(false);
+  const [passwordisEmpty, setPasswordIsEmpty] = useState(false);
   const [disableSubmit, setDisableSubmit] = useState(true);
   const [loginData, setLoginData] = useState({
     username: '',
     password: ''
   });
-  const [passwordisEmpty, setPasswordIsEmpty] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -36,7 +36,6 @@ const Login = () => {
     if (name === 'password') {
       setPasswordIsEmpty(value.trim() === '');
     }
-    
   };
 
   const navigate = useNavigate();
@@ -56,7 +55,7 @@ const Login = () => {
   return (
     <div className='container d-flex flex-column'>
       <form className="d-flex flex-column" onSubmit={handleSubmit}>
-        <h1 className='title mb-5'>Login</h1>
+        <h1 className='mb-5'>Login</h1>
         <label htmlFor="username" className="form-label">Username</label>
         <input 
           type='text'
