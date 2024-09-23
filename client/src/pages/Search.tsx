@@ -13,6 +13,8 @@ interface Book {
 const BookSearch: React.FC = () => {
   const [query, setQuery] = useState("");
   const [books, setBooks] = useState<Book[]>([]);
+  const [showPopup, setShowPopup] = useState(false); // State to control pop-up visibility
+  const [popupMessage, setPopupMessage] = useState(""); // State to control pop-up message
 
   const searchBooks = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -30,19 +32,34 @@ const BookSearch: React.FC = () => {
     } catch (error) {
       console.error("Error fetching books:", error);
     }
-  };
+  }
 
   const addBook = (book: Book) => {
     const savedBooks = JSON.parse(localStorage.getItem("savedBooks") || "[]");
     const updatedBooks = [...savedBooks, book];
     localStorage.setItem("savedBooks", JSON.stringify(updatedBooks));
     console.log(`${book.title} by ${book.author} was added to saved books!`);
-  };
+
+        // Show pop-up
+        setPopupMessage(`${book.title} was added!`);
+        setShowPopup(true);
+    
+        // Hide pop-up after 2 seconds
+        setTimeout(() => {
+          setShowPopup(false);
+        }, 2000);
+      };
 
   return (
     
     <div className='search-container d-flex flex-column align-items-center'>
       <h1 className="mb-5">Search</h1>
+            {/* Pop-up message */}
+            {showPopup && (
+        <div className="popup-message">
+          {popupMessage}
+        </div>
+      )}
       <div className='search-box'>
         <form>
           <input

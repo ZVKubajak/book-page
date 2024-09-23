@@ -9,6 +9,7 @@ import Signup from './pages/Signup.tsx';
 import Search from './pages/Search.tsx';
 import BestSeller from './pages/Bestseller.tsx';
 import Library from './pages/Library.tsx';
+import Favorites from './pages/Favorites.tsx';
 
 const router = createBrowserRouter([
   {
@@ -30,11 +31,15 @@ const router = createBrowserRouter([
       },
       {
         path: "search",
-        element: auth.loggedIn() ? <Search /> : <Navigate to="/login" replace />
+        element: <Search />
       },
       {
         path: 'bestsellers',
         element: auth.loggedIn() ? <BestSeller /> : <Navigate to="/login" replace />
+      },
+      {
+        path: 'favorites',
+        element: auth.loggedIn() ? <Favorites /> : <Navigate to="/login" replace />
       },
       {
         path: 'library',
