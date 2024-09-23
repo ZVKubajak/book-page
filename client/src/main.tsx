@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "search",
-        element: auth.loggedIn() ? <Search /> : <Navigate to="/login" replace />
+        element: <Search />
       },
       {
         path: 'bestsellers',
