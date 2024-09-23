@@ -9,7 +9,7 @@ interface GoogleBookVolume {
   }
   
  function formatBookData(googleBook: GoogleBookVolume): Omit<BookAttributes, 'bookId'> {
-    console.log(googleBook);
+    // console.log(googleBook);
     const title = googleBook.volumeInfo.title || 'Unknown Title';
     
     // Join authors if there's more than one, otherwise default to 'Unknown Author'

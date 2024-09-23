@@ -8,38 +8,48 @@ import Login from './pages/Login.tsx';
 import auth from './utils/auth.ts';
 import Signup from './pages/Signup.tsx';
 import Search from './pages/Search.tsx';
+import BestSeller from './pages/Bestseller.tsx';
+import Library from './pages/Library.tsx';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />, // Use Layout as the parent route
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '',
-        element: <Navigate to="/login" replace /> // Redirect root to login
+        path: "",
+        element: <Navigate to="/login" replace />, // Redirect root to login
       },
       {
-        path: 'login',
-        element: <Login />
+        path: "login",
+        element: <Login />,
       },
       {
-        path: 'signup',
-        element: <Signup />
+        path: "signup",
+        element: <Signup />,
       },
       {
-        path: 'search',
-        element: <Search />
+        path: "search",
+        element: auth.loggedIn() ? <Search /> : <Navigate to="/login" replace />
+      },
+      {
+        path: 'bestsellers',
+        element: auth.loggedIn() ? <BestSeller /> : <Navigate to="/login" replace />
       },
       {
         path: 'reviews',
-        element: auth.loggedIn() ? <Reviews /> : <Navigate to="/login" replace /> // Protect the /home route
+        element: auth.loggedIn() ? <Reviews /> : <Navigate to="/login" replace />
+      },
+      {
+        path: 'library',
+        element: auth.loggedIn() ? <Library /> : <Navigate to="/login" replace />
       }
     ]
   }
 ]);
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(<RouterProvider router={router} />);
 }

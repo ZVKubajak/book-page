@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import apiRoutes from './api/index.js';
 import { loginUser, registerUser, updateUser } from '../controllers/user-controller.js';
-// import { authenticateToken } from '../middleware/auth.js';
 
 const router = Router();
 

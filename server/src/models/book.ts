@@ -1,6 +1,8 @@
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
 import { User } from './user';
 
+
+
 interface BookAttributes {
 
   bookId: number;

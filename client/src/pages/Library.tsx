@@ -1,12 +1,61 @@
-import './css/Library.css';
+import { useState, useEffect } from "react";
+import { Book } from "../utils/bookInterface.ts";
+import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
+import "./css/Library.css";
 
-export default function Library() {
+const Library = () => {
+  const [books, setBooks] = useState<Book[]>([]);
+
+    useEffect(() => {
+      const savedBooks = JSON.parse(localStorage.getItem("savedBooks") || "[]");
+      setBooks(savedBooks);
+    }, []);
 
 
+  const removeBook = (index: number) => {
+    const updatedBooks = books.filter((_, i) => i !== index);
+    localStorage.setItem("savedBooks", JSON.stringify(updatedBooks));
+    setBooks(updatedBooks);
+  };
 
+  const rows: JSX.Element[] = [];
+  books.forEach((book, index) => {
+    rows.push(
+       <tr key={book.bookId}>
+        <td className="center">{index + 1}</td>
+        <td>{book.title}</td>
+        <td>{book.author}</td>
+        <td>{book.isbn}</td>
+        <td className="center">
+          <Button variant="danger" onClick={() => removeBook(index)}>
+            Remove
+          </Button>
+        </td>
+      </tr>
+    );
+  });
 
-  
   return (
-    <h1>Library</h1>
+    <div id="library">
+      <h1>Library</h1>
+
+      <main>
+        <Table striped bordered hover variant="dark">
+          <thead>
+            <tr>
+              <th className="center">#</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th>ISBN</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>{rows}</tbody>
+        </Table>
+      </main>
+    </div>
   );
-}
+};
+
+export default Library;
