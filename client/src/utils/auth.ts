@@ -1,6 +1,7 @@
 class AuthService {
   getProfile() {
     // TODO: return the decoded token
+    return localStorage.getItem('token');
   }
 
   loggedIn() {

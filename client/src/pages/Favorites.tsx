@@ -13,19 +13,37 @@ const Favorites: React.FC = () => {
   const [favorites, setFavorites] = useState<Book[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchResults, setSearchResults] = useState<Book[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   // Function to fetch books from Google Books API
   const fetchBooks = async (query: string) => {
-    const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${query}`
-    );
-    const data = await response.json();
-    const books = data.items.map((item: any) => ({
-      id: item.id,
-      title: item.volumeInfo.title,
-      author: item.volumeInfo.authors?.join(", ") || "Unknown Author",
-    }));
-    setSearchResults(books);
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `https://www.googleapis.com/books/v1/volumes?q=${query}`
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      if (data.items) {
+        const books = data.items.map((item: any) => ({
+          id: item.id,
+          title: item.volumeInfo.title,
+          author: item.volumeInfo.authors?.join(", ") || "Unknown Author",
+        }));
+        setSearchResults(books);
+      } else {
+        setSearchResults([]); // No books found
+      }
+    } catch (error) {
+      console.error("Error fetching books:", error);
+      setSearchResults([]); // Clear results on error
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Function to handle adding a book to favorites
@@ -65,6 +83,8 @@ const Favorites: React.FC = () => {
         <button type="submit">Search</button>
       </form>
 
+      {loading && <p>Loading...</p>}
+
       <h3>Search Results</h3>
       <ul>
         {searchResults.map((book) => (
@@ -93,6 +113,7 @@ const Favorites: React.FC = () => {
 };
 
 export default Favorites;
+
 
 
 
