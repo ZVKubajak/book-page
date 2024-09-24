@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import auth from "./utils/auth"; // Adjust the import path as necessary
+import logo from './assets/logo.png';
 
 function App() {
   const navigate = useNavigate();
@@ -12,8 +13,8 @@ function App() {
 
   return (
     <div>
-      <header className="d-flex justify-content-between align-items-center p-4 mb-5">
-        <h3>Bookpage</h3>
+      <header className="d-flex justify-content-between align-items-center px-4 mb-5">
+        <img className="logo" src={logo} alt="Bookpage logo" />
         {auth.loggedIn() && (
           <div className="nav d-flex align-items-center gap-4">
             <ul className="d-flex gap-4"> 
