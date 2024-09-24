@@ -1,13 +1,39 @@
-# Book Page
+  # Book Page
+  ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-## Setup
-1. Ensure you create a `.env` filed based on the `.env-example` in the `server` folder. Ask team for JWT_SECRET value
-2. At the root project level in the terminal run `npm run install`
-3. `cd` into `client/db`
-4. Run `psql -U postgres` enter your password
-5. Run `\i schema.sql` to create the database
-6. Go back to the root project level and run `npm run seed` to add the test user to the User table
+  ## Description
 
-## Running the app
-1. Run `npm run build`
-2. Run `npm run start:dev`
+  A personal online library for readers to search, save, and organize their favorite reads all in one place.
+
+  ## Table of Contents
+
+  - [Usage](#usage)
+  - [Credits](#credits)
+  - [License](#license)
+  - [Questions](#questions)
+
+  ## Usage
+
+  Sign up for a Book Page account. In the search bar, users can search for books by their title and have the ability to add them to their personal library. While in the library, users can favorite or remove books to their liking. Users can also use the bestsellers page to find books from various genres that are currently trending. When clicking on any of the bestselling books, users will be redirected to an Amazon link of the chosen book.
+
+  ## Credits
+
+[Zander Kubajak](https://github.com/ZVKubajak)
+
+[Brooke Cline](https://github.com/bcline01)
+
+[Selena Garcia](https://github.com/selmgar)
+
+[Zoe Miller](https://github.com/millezo326)
+
+  ## License
+
+  Covered under the MIT License. For more information, click [here](https://opensource.org/licenses/MIT).
+
+  ## Questions
+
+  For any questions, please contact the repository owner, ZVKubajak, through GitHub or work email.
+
+  GitHub: [ZVKubajak](github.com/ZVKubajak)
+  
+  Email: zvkubajak@gmail.com
