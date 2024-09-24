@@ -6,6 +6,7 @@ import "./css/Library.css";
 import { TiStarFullOutline } from "react-icons/ti";
 
 
+
 const Library = () => {
   const [books, setBooks] = useState<Book[]>([]);
 
@@ -21,6 +22,12 @@ const Library = () => {
     setBooks(updatedBooks);
   };
 
+  const addFavorite = (book: Book) => {
+    const savedFavorite = JSON.parse(localStorage.getItem("savedFavorite") || "[]");
+    const updatedBooks = [...savedFavorite, book];
+    localStorage.setItem("savedFavorite", JSON.stringify(updatedBooks));
+  };
+
   const rows: JSX.Element[] = [];
   books.forEach((book, index) => {
     rows.push(
@@ -32,7 +39,7 @@ const Library = () => {
         <td className="center">
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <button 
-            // onClick={saveBookToLocalStorage} 
+            onClick={() => addFavorite(book)} 
             style={{ background: 'none', border: 'none', cursor: 'pointer', marginBottom: '8px', color: 'white' }}
             aria-label="Save to Favorites"
             className="icon-button"
