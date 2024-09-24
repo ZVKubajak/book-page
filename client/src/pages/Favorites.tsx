@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './css/Favorites.css';
+import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
 
 // Type definition for a book
 interface Book {
@@ -20,17 +22,7 @@ const Favorites: React.FC = () => {
     setFavorites(savedFavorite);
   }, []);
 
-  // Function to handle adding a book to favorites
-  // const addFavorite = (book: Book) => {
-  //   if (!favorites.some((fav) => fav.id === book.id)) {
-  //     setFavorites((prev) => [...prev, book]);
-  //   }
-  // };
 
-  // Function to handle removing a book from favorites
-  // const removeFavorite = (bookId: string) => {
-  //   setFavorites((prev) => prev.filter((book) => book.id !== bookId));
-  // };
 
   const removeFavorite = (index: number) => {
     const updatedFavorite = favorites.filter((_, i) => i !== index);
@@ -38,56 +30,48 @@ const Favorites: React.FC = () => {
     setFavorites(updatedFavorite);
   };
 
-  // Handle search input change
-  // const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setSearchTerm(e.target.value);
-  // };
 
-  // Handle search submission
-  // const handleSearchSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   fetchBooks(searchTerm);
-  // };
 
   return (
-    <div>
-      <h2>Favorites</h2>
-      
-      {/* <form onSubmit={handleSearchSubmit}>
-        <input
-          type="text"
-          placeholder="Search for books..."
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
-        <button type="submit">Search</button>
-      </form>
-
-      <h3>Search Results</h3> */}
-      {/* <ul>
-        {searchResults.map((book) => (
-          <li key={book.id}>
-            <strong>{book.title}</strong> by {book.author}
-            <button onClick={() => addFavorite(book)}>Add to Favorites</button>
-          </li>
-        ))}
-      </ul> */}
-
-      <h3>Your Favorites</h3>
-      <ul>
-  {favorites.length === 0 ? (
-    <li>No favorites added!</li>
-  ) : (
-    favorites.map((book, index) => (
-      <li key={`${book.id}-${index}`}>
-        <strong>{book.title}</strong> by {book.author}
-        <button onClick={() => removeFavorite(index)}>Remove</button>
-      </li>
-    ))
-  )}
-</ul>
+    <div id="favorites" className="d-flex flex-column align-items-center">
+      {/* <h2 className="mb-4">Favorites</h2> */}
+  
+      <h3 className="mb-3">Your Favorite Books</h3>
+  
+      {favorites.length === 0 ? (
+        <p>No favorites added!</p>
+      ) : (
+        <Table striped bordered hover variant="dark">
+          <thead>
+            <tr>
+              <th className="center">#</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th></th> {/* Column for action buttons */}
+            </tr>
+          </thead>
+          <tbody>
+            {favorites.map((book, index) => (
+              <tr key={`${book.id}-${index}`}>
+                <td className="center">{index + 1}</td>
+                <td>{book.title}</td>
+                <td>{book.author}</td>
+                <td className="center">
+                  <Button
+                    variant="danger"
+                    onClick={() => removeFavorite(index)}
+                  >
+                    Remove
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
     </div>
   );
+  
 };
 
 export default Favorites;

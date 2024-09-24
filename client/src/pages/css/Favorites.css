@@ -1,0 +1,25 @@
+
+.center {
+    text-align: center
+  }
+  
+  #favorites {
+  
+  
+    h1, table {
+      width: 100%;
+      max-width: 900px;
+      min-width: 900px;
+    }
+    table {
+  
+      /* Allows for setting table border */
+      border-radius: 10px;
+      overflow: hidden;
+  
+      td {
+        /* aligns text to the center of the cell */
+        vertical-align: middle;
+      }
+    }
+  }
