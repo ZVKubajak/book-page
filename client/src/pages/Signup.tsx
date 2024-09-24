@@ -1,5 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { registerUser } from '../api/userAPI';
+import { useNavigate } from 'react-router-dom';
 import './css/Signup.css';
 
 export default function Signup() {
@@ -10,6 +11,8 @@ export default function Signup() {
     username: '',
     password: ''
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -38,7 +41,7 @@ export default function Signup() {
     e.preventDefault();
     try {
       await registerUser(signupData.username, signupData.password);
-      window.location.assign('/login');
+      navigate('/login'); // useLocation
     } catch (err) {
       console.error('Failed to sign up user', err);
     }
