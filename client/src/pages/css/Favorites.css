@@ -1,41 +1,78 @@
-h2 {
-    text-align: center;
+/* Favorites.css */
+
+/* General Styles */
+body {
+    background-color: #f8f9fa; /* Light gray background for a clean look */
+    font-family: 'Arial', sans-serif; /* Simple font for readability */
   }
   
+  h2, h3 {
+    margin-bottom: 20px; /* Spacing below headers */
+    text-align: center; /* Center-align headings */
+    color: #343a40; /* Dark gray color for text */
+  }
+  
+  /* Form Styles */
   form {
     display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+    justify-content: center; /* Center the form elements */
+    margin-bottom: 20px; /* Spacing below the form */
   }
   
-  input {
-    padding: 10px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  input[type="text"] {
+    padding: 10px; /* Add padding for better touch targets */
+    border: 1px solid #ced4da; /* Border styling */
+    border-radius: 5px; /* Rounded corners */
+    width: 300px; /* Set a fixed width for input */
   }
   
   button {
-    padding: 10px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
+    margin-left: 10px; /* Spacing between input and button */
+    padding: 10px 15px; /* Padding for buttons */
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* Text color for buttons */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor for buttons */
   }
   
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+  /* List Styles */
   ul {
-    list-style-type: none;
-    padding: 0;
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
   }
   
   li {
-    margin: 10px 0;
+    background-color: #ffffff; /* White background for list items */
+    margin: 10px 0; /* Spacing between list items */
+    padding: 15px; /* Padding for list items */
+    border: 1px solid #ced4da; /* Border styling */
+    border-radius: 5px; /* Rounded corners */
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Align items within the list */
+    align-items: center; /* Center items vertically */
+  }
+  
+  /* Link Styles */
+  strong {
+    color: #417ab8; /* Color for book titles */
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    input[type="text"] {
+      width: 100%; /* Full width on smaller screens */
+    }
+    
+    form {
+      flex-direction: column; /* Stack input and button on smaller screens */
+      align-items: center; /* Center the items */
+    }
+  
+    button {
+      width: 100%; /* Full width for buttons on smaller screens */
+      margin-left: 0; /* Reset margin on smaller screens */
+      margin-top: 10px; /* Add spacing above buttons */
+    }
   }
   
